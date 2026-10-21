@@ -1,0 +1,67 @@
+#include <stdio.h>
+int main() {
+    int i, j;
+    printf("FIRST PATTERN\n\n");
+    for (i = 1; i <= 5; i++) {
+        for (j = 1; j <= 5 - i; j++)
+            printf("  ");
+        for (j = 1; j <= i; j++)
+            printf("* ");
+        printf(" | ");
+        for (j = 1; j <= 5 - i; j++)
+            printf("  ");
+        for (j = 1; j <= i; j++)
+            printf("%d ", j);
+        printf(" | ");
+        for (j = 1; j <= 5 - i; j++)
+            printf("  ");
+        for (j = 1; j <= i; j++)
+            printf("%c ", 'A' + j - 1);
+        printf("\n");
+    }
+    printf("\nSECOND PATTERN\n\n");
+    int len, left, p, q, r;
+    char stars[30], numbers[30], letters[30];
+    for (i = 1; i <= 5; i++) {
+        p = 0;
+        q = 0;
+        r = 0;
+        for (j = 1; j <= 2 * i - 1; j++) {
+            stars[p++] = '*';
+            if (j < 2 * i - 1)
+                stars[p++] = ' ';
+        }
+        stars[p] = '\0';
+        for (j = 1; j <= 2 * i - 1; j++) {
+            numbers[q++] = '0' + j;
+            if (j < 2 * i - 1)
+                numbers[q++] = ' ';
+        }
+        numbers[q] = '\0';
+        for (j = 1; j <= 2 * i - 1; j++) {
+            letters[r++] = 'A' + j - 1;
+            if (j < 2 * i - 1)
+                letters[r++] = ' ';
+        }
+        letters[r] = '\0';
+        len = 0;
+        while (stars[len] != '\0')
+            len++;
+        left = (19 - len) / 2;
+        printf("%*s%s%*s | ", left, "", stars,
+               19 - len - left, "");
+        len = 0;
+        while (numbers[len] != '\0')
+            len++;
+        left = (19 - len) / 2;
+        printf("%*s%s%*s | ", left, "", numbers,
+               19 - len - left, "");
+        len = 0;
+        while (letters[len] != '\0')
+            len++;
+        left = (19 - len) / 2;
+        printf("%*s%s%*s\n", left, "", letters,
+               19 - len - left, "");
+    }
+    return 0;
+}
