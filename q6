@@ -1,0 +1,49 @@
+#include <stdio.h>
+int main() {
+    int data[3][3];
+    int key[3][3];
+    int encrypted[3][3];
+    int i, j;
+    int max, maxRow = 0, maxCol = 0;
+    printf("Enter values for the Data Matrix:\n");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("Enter value at (%d, %d): ", i + 1, j + 1);
+            scanf("%d", &data[i][j]);
+        }
+    }
+    printf("\nEnter values for the Key Matrix:\n");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("Enter key at (%d, %d): ", i + 1, j + 1);
+            scanf("%d", &key[i][j]);
+        }
+    }
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            encrypted[i][j] =
+                (data[i][j] * key[i][j]) + (i + j);
+        }
+    }
+    printf("\nEncrypted Matrix:\n");
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            printf("%d\t", encrypted[i][j]);
+        }
+        printf("\n");
+    }
+    max = encrypted[0][0];
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            if (encrypted[i][j] > max) {
+                max = encrypted[i][j];
+                maxRow = i;
+                maxCol = j;
+            }
+        }
+    }
+    printf("\nMaximum Encrypted Value: %d\n", max);
+    printf("Position (row, column): (%d, %d)\n",
+           maxRow + 1, maxCol + 1);
+    return 0;
+}
