@@ -1,0 +1,50 @@
+#include <stdio.h>
+int main() {
+    float temp[3][3][3];
+    float sum, avg[3];
+    float maxTemp;
+    int i, j, k;
+    int hottestLayer = 0;
+    int maxX = 0, maxY = 0, maxZ = 0;
+    for (i = 0; i < 3; i++) {
+        for (j = 0; j < 3; j++) {
+            for (k = 0; k < 3; k++) {
+                printf("Enter temperature at (%d, %d, %d): ",
+                       i + 1, j + 1, k + 1);
+                scanf("%f", &temp[i][j][k]);
+            }
+        }
+    }
+    maxTemp = temp[0][0][0];
+    for (k = 0; k < 3; k++) {
+        sum = 0;
+        for (i = 0; i < 3; i++) {
+            for (j = 0; j < 3; j++) {
+                sum += temp[i][j][k];
+                if (temp[i][j][k] > maxTemp) {
+                    maxTemp = temp[i][j][k];
+                    maxX = i;
+                    maxY = j;
+                    maxZ = k;
+                }
+            }
+        }
+        avg[k] = sum / 9.0;
+    }
+    for (k = 1; k < 3; k++) {
+        if (avg[k] > avg[hottestLayer]) {
+            hottestLayer = k;
+        }
+    }
+    printf("\n--- Average Temperature per Layer ---\n");
+    for (k = 0; k < 3; k++) {
+        printf("Layer %d: %.2f C\n", k + 1, avg[k]);
+    }
+    printf("\nHottest Layer: %d\n", hottestLayer + 1);
+    printf("Average Temperature: %.2f C\n",
+           avg[hottestLayer]);
+    printf("\nMaximum Temperature: %.2f C\n", maxTemp);
+    printf("Coordinates (x, y, z): (%d, %d, %d)\n",
+           maxX + 1, maxY + 1, maxZ + 1);
+    return 0;
+}
